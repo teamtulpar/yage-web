@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Image as ImageIcon } from "lucide-react";
-import { CommunityEvent } from "../types";
+import { CommunityEvent } from "../../types";
 
 export default function EventCard({ event }: { event: CommunityEvent }) {
     return (
-        <Link href={`/etkinlikler/${event.slug}`} className="group flex flex-col bg-brand-surface rounded-sm overflow-hidden border border-brand-text/5 hover:border-brand-text/20 transition-all cursor-pointer h-full relative">
+        <Link href={`/src/app/(main)/etkinlikler/${event.slug}`} className="group flex flex-col bg-brand-surface rounded-sm overflow-hidden border border-brand-text/5 hover:border-brand-text/20 transition-all cursor-pointer h-full relative">
             <div className="h-56 bg-brand-surface-lighter relative overflow-hidden border-b border-brand-text/5">
                 <div className="absolute top-4 left-4 flex gap-2 z-20">
                     <span className="bg-brand-bg/70 backdrop-blur-md text-brand-text text-[10px] font-mono px-3 py-1.5 rounded-sm uppercase tracking-widest">{event.date}</span>

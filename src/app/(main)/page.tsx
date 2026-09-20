@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Users, Calendar, Rocket } from "lucide-react";
 
-import ScrollReveal from "@/src/components/ScrollReveal";
-import AnimatedCounter from "@/src/components/AnimatedCounter";
-import EventCard from "@/src/components/EventCard";
-import AetherHero from "@/src/components/AetherHero";
-import PersonCard from "@/src/components/PersonCard";
-import CtaLink from "@/src/components/CtaLink";
+import ScrollReveal from "@/src/components/main/ScrollReveal";
+import AnimatedCounter from "@/src/components/main/AnimatedCounter";
+import EventCard from "@/src/components/main/EventCard";
+import AetherHero from "@/src/components/main/AetherHero";
+import PersonCard from "@/src/components/main/PersonCard";
+import CtaLink from "@/src/components/main/CtaLink";
 
 import { events, activities, teamMembers, showcaseImages, sponsors } from "@/src/data/siteData";
 

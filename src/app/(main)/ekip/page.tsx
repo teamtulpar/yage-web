@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { teamMembers } from "@/src/data/siteData";
-import ScrollReveal from "@/src/components/ScrollReveal";
-import PersonCard from "@/src/components/PersonCard";
-import CtaLink from "@/src/components/CtaLink";
+import ScrollReveal from "@/src/components/main/ScrollReveal";
+import PersonCard from "@/src/components/main/PersonCard";
+import CtaLink from "@/src/components/main/CtaLink";
 
 export default function TeamPage() {
     const [activeTab, setActiveTab] = useState("Yönetim");

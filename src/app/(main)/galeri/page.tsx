@@ -1,5 +1,5 @@
-import { events } from "../../data/siteData";
-import GalleryViewer, { GalleryPhotoItem } from "../../components/GalleryViewer";
+import { events } from "../../../data/siteData";
+import GalleryViewer, { GalleryPhotoItem } from "../../../components/main/GalleryViewer";
 
 export const metadata = {
     title: "Galeri | YAGE",

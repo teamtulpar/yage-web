@@ -79,8 +79,22 @@ export default function Navbar() {
           </div>
 
           {/* SAĞ AKSİYONLAR (Mobilde ve Desktopta Görünür) */}
-          <div className="flex w-auto md:w-1/4 justify-end items-center gap-3 sm:gap-4">
-            {/* BİZE KATIL BUTONU - Artık mobilde de navbar'da sabit! */}
+          <div className="flex w-auto md:w-1/4 justify-end items-center gap-2 sm:gap-4">
+
+            {/* TULPAR ALT SİTESİ BUTONU */}
+            <Link
+                href="[https://tulpar.gaziyage.org](https://tulpar.gaziyage.org)"
+                className="group flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 rounded-sm border border-brand-text/10 bg-brand-surface-dark hover:bg-brand-surface-light hover:border-brand-text/20 transition-all duration-300"
+                title="TULPAR Ülgen Sistemine Git"
+            >
+              {/* Kırmızı Sinyal Ledi */}
+              <span className="w-1.5 h-1.5 rounded-full bg-brand-error/60 group-hover:bg-brand-error group-hover:shadow-[0_0_8px_var(--color-brand-error)] transition-all duration-300"></span>
+              <span className="text-[10px] md:text-xs font-mono font-bold tracking-widest text-brand-muted group-hover:text-brand-text transition-colors">
+                TULPAR
+              </span>
+            </Link>
+
+            {/* BİZE KATIL BUTONU */}
             <CtaLink
                 href="/katil"
                 className="px-4 py-2 text-xs md:px-6 md:py-2.5 md:text-sm whitespace-nowrap"

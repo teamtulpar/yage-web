@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, MapPin, Tag, Image as ImageIcon } from "lucide-react";
-import { events } from "../../../data/siteData";
-import ScrollReveal from "../../../components/ScrollReveal";
-import GalleryViewer from "../../../components/GalleryViewer";
+import { events } from "../../../../data/siteData";
+import ScrollReveal from "../../../../components/main/ScrollReveal";
+import GalleryViewer from "../../../../components/main/GalleryViewer";
 
 // Next.js 15+ için params bir Promise olarak tanımlanmalı
 type Props = {

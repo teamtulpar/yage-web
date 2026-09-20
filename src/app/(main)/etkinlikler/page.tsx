@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { Search, ChevronDown, RotateCcw } from "lucide-react";
-import { events, eventCategories, academicYears } from "../../data/siteData";
-import EventCard from "../../components/EventCard";
-import FeaturedEventCard from "../../components/FeaturedEventCard";
-import ScrollReveal from "../../components/ScrollReveal";
+import { events, eventCategories, academicYears } from "../../../data/siteData";
+import EventCard from "../../../components/main/EventCard";
+import FeaturedEventCard from "../../../components/main/FeaturedEventCard";
+import ScrollReveal from "../../../components/main/ScrollReveal";
 
 export default function EventsPage() {
     const [activeCategory, setActiveCategory] = useState("");

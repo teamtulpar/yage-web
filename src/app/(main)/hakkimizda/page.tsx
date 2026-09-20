@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { events, teamMembers } from "../../data/siteData";
-import ScrollReveal from "../../components/ScrollReveal";
+import { events, teamMembers } from "../../../data/siteData";
+import ScrollReveal from "../../../components/main/ScrollReveal";
 
 export const metadata = {
   title: "Hakkımızda",

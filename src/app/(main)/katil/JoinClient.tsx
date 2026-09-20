@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Loader2, CheckCircle2, XCircle } from "lucide-react";
-import ScrollReveal from "../../components/ScrollReveal";
-import { unitDetails, allUnits } from "../../data/siteData";
-import { Input, Textarea, Select } from "../../components/FormElements";
+import ScrollReveal from "../../../components/main/ScrollReveal";
+import { unitDetails, allUnits } from "../../../data/siteData";
+import { Input, Textarea, Select } from "../../../components/main/FormElements";
 
 export default function JoinClient() {
     const router = useRouter();

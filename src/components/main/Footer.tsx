@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { siteConfig } from "../data/siteData";
+import { siteConfig } from "../../data/siteData";
 
 // Doğrudan SVG İkonları (Lucide veya dış kütüphane bağımlılığı yok)
 const InstagramIcon = ({ size = 20, className = "" }) => (
@@ -47,7 +47,7 @@ export default function Footer() {
 
                 {/* Sol Kısım - Logo ve Açıklama */}
                 <div className="flex flex-col items-center md:items-start max-w-sm text-center md:text-left">
-                    <Link href="/" aria-label="Ana Sayfaya Dön">
+                    <Link href="/public" aria-label="Ana Sayfaya Dön">
                         <Image
                             src="/images/logo/yage-logo.png"
                             alt="YAGE"

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, Sparkles } from "lucide-react";
-import { CommunityEvent } from "../types";
+import { CommunityEvent } from "../../types";
 
 export default function FeaturedEventCard({ event }: { event: CommunityEvent }) {
     return (
         <Link
-            href={`/etkinlikler/${event.slug}`}
+            href={`/src/app/(main)/etkinlikler/${event.slug}`}
             className="group flex flex-col md:grid md:grid-cols-12 bg-brand-surface rounded-xl overflow-hidden border border-brand-text/5 hover:border-brand-text/20 transition-all duration-300 relative h-full focus:outline-none focus:ring-2 focus:ring-brand-primary/50"
         >
             {/* Büyük Fotoğraf Alanı (Mobilde aspect-16/10, masaüstünde sol 6 kolon) */}

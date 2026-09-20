@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { ArrowRight, Loader2, CheckCircle2, XCircle, RefreshCw } from "lucide-react";
-import ScrollReveal from "../../components/ScrollReveal";
-import { siteConfig } from "../../data/siteData";
-import { Input, Textarea, Select } from "../../components/FormElements";
+import ScrollReveal from "../../../components/main/ScrollReveal";
+import { siteConfig } from "../../../data/siteData";
+import { Input, Textarea, Select } from "../../../components/main/FormElements";
 
 export default function ContactClient() {
     const [errorMessage, setErrorMessage] = useState("");
