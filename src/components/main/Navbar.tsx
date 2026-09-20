@@ -83,7 +83,7 @@ export default function Navbar() {
 
             {/* TULPAR ALT SİTESİ BUTONU */}
             <Link
-                href="[https://tulpar.gaziyage.org](https://tulpar.gaziyage.org)"
+                href="https://tulpar.gaziyage.org"
                 className="group flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 rounded-sm border border-brand-text/10 bg-brand-surface-dark hover:bg-brand-surface-light hover:border-brand-text/20 transition-all duration-300"
                 title="TULPAR Ülgen Sistemine Git"
             >
