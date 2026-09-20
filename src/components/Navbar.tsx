@@ -18,6 +18,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Sayfa değiştiğinde mobil menüyü otomatik kapat ve kaydırma kilidini kaldır
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    document.body.style.overflow = "";
+  }, [pathname]);
+
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+    document.body.style.overflow = "";
+  };
+
   const navLinks = [
     { name: "Hakkımızda", path: "/hakkimizda" },
     { name: "Etkinlikler", path: "/etkinlikler" },
@@ -35,9 +46,8 @@ export default function Navbar() {
           }`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
-
           <div className="w-auto md:w-1/4 flex justify-start">
-            <Link href="/" aria-label="Ana Sayfaya Dön">
+            <Link href="/" aria-label="Ana Sayfaya Dön" onClick={closeMenu}>
               <Image
                   src="/images/logo/yage-logo.png"
                   alt="YAGE"
@@ -84,17 +94,19 @@ export default function Navbar() {
               aria-label={mobileMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
               className="md:hidden text-brand-text relative z-50 p-2 -mr-2"
               onClick={() => {
-                setMobileMenuOpen(!mobileMenuOpen);
-                document.body.style.overflow = !mobileMenuOpen ? "hidden" : "unset";
+                const newState = !mobileMenuOpen;
+                setMobileMenuOpen(newState);
+                document.body.style.overflow = newState ? "hidden" : "";
               }}
           >
             {mobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
           </button>
         </div>
 
+        {/* Mobil Menü Overlay - z-40 eklendi ki butonların (z-50) altında kalsın */}
         <div
             id="mobile-menu"
-            className={`fixed inset-0 bg-brand-bg flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-in-out md:hidden ${
+            className={`fixed inset-0 z-40 bg-brand-bg flex flex-col items-center justify-center gap-8 transition-all duration-500 ease-in-out md:hidden ${
                 mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
             }`}
         >
@@ -104,10 +116,7 @@ export default function Navbar() {
                 <Link
                     key={link.path}
                     href={link.path}
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      document.body.style.overflow = "unset";
-                    }}
+                    onClick={closeMenu}
                     className={`text-2xl font-bold tracking-tight transition-colors ${
                         isActive ? "text-brand-primary" : "text-brand-text"
                     }`}
@@ -117,12 +126,11 @@ export default function Navbar() {
             )
           })}
 
-          <CtaLink href="/katil" onClick={() => {
-            setMobileMenuOpen(false);
-            document.body.style.overflow = "unset";
-          }} className="mt-8 px-10 py-4 text-lg">
-            Bize Katıl
-          </CtaLink>
+          <div onClick={closeMenu} className="mt-8">
+            <CtaLink href="/katil" className="px-10 py-4 text-lg inline-block">
+              Bize Katıl
+            </CtaLink>
+          </div>
         </div>
       </nav>
   );
