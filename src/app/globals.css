@@ -19,7 +19,7 @@
   --color-brand-social-whatsapp-hover: #20b858;
   --color-brand-scrollbar: #334155;
 
-  /* Animasyonlar */
+  /* Animasyon Tanımlamaları */
   --animate-fade-up: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-grid-pan: gridPan 15s linear infinite;
   --animate-marquee-slow: marquee 40s linear infinite;
@@ -36,6 +36,21 @@
     0% { background-position: 0 0; }
     100% { background-position: 0 24px; }
   }
+}
+
+
+/* STANDART CSS KURALLARI */
+
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
@@ -59,6 +74,7 @@ html, body {
   }
 }
 
+/* Tailwind v4 Utility Class Tanımlamaları */
 @utility page-header {
   @apply w-full pt-40 pb-16 px-6 border-b border-brand-text/5;
 }

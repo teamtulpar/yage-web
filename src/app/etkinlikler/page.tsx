@@ -20,18 +20,15 @@ export default function EventsPage() {
     const filteredEvents = useMemo(() => {
         const q = searchQuery.trim().toLocaleLowerCase("tr-TR");
         return events.filter((e) => {
-            // Kategori kontrolü
             const matchCategory =
                 activeCategory === "" ||
                 e.category.toLocaleLowerCase("tr-TR") === activeCategory.toLocaleLowerCase("tr-TR");
 
-            // Dönem kontrolü (hem tire hem en-dash desteklenir)
             const cleanEventYear = e.academicYear.replace("–", "-");
             const cleanFilterYear = activeYear.replace("–", "-");
             const matchYear =
                 activeYear === "Tüm Dönemler" || cleanEventYear === cleanFilterYear;
 
-            // Arama kontrolü (başlık, özet ve konum içinde)
             const matchSearch =
                 !q ||
                 e.title.toLocaleLowerCase("tr-TR").includes(q) ||
@@ -104,7 +101,7 @@ export default function EventsPage() {
                                         id="academic-year-select"
                                         value={activeYear}
                                         onChange={(e) => setActiveYear(e.target.value)}
-                                        className="w-full appearance-none bg-brand-surface text-brand-text border border-brand-text/10 rounded-sm pl-4 pr-10 py-2.5 text-sm font-medium focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors cursor-pointer"
+                                        className="w-full appearance-none bg-brand-surface text-brand-text border border-brand-text/10 rounded-sm pl-4 pr-10 py-2.5 text-base sm:text-sm font-medium focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors cursor-pointer"
                                     >
                                         {academicYears.map((year) => (
                                             <option key={year} value={year} className="bg-brand-surface-dark text-brand-text py-2">
@@ -123,13 +120,14 @@ export default function EventsPage() {
                                         size={17}
                                         className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted"
                                     />
+                                    {/* DÜZELTME 2: text-sm yerine mobilde text-base, masaüstünde sm:text-sm */}
                                     <input
                                         aria-label="Etkinlik ara"
                                         type="text"
-                                        placeholder="Etkinlik başlığı, özet veya konuma göre ara..."
+                                        placeholder="Etkinlik başlığı veya özet ara..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-brand-surface border border-brand-text/10 rounded-sm py-2.5 pl-10 pr-10 text-sm text-brand-text placeholder:text-brand-muted/50 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors"
+                                        className="w-full bg-brand-surface border border-brand-text/10 rounded-sm py-2.5 pl-10 pr-10 text-base sm:text-sm text-brand-text placeholder:text-brand-muted/50 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors"
                                     />
                                     {searchQuery && (
                                         <button

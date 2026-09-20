@@ -164,7 +164,6 @@ const AetherHero = () => {
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('mouseout', handleMouseOut);
 
-        // Performans Optimizasyonu: Sadece ekranda görünürken animasyonu çalıştır
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -239,13 +238,13 @@ const AetherHero = () => {
 
                     <motion.div
                         custom={3} variants={fadeUpVariants} initial={false} animate="visible"
-                        className="flex flex-wrap items-center gap-5"
+                        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5"
                     >
-                        <a href={siteConfig.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-brand-surface text-brand-text border border-brand-text/20 px-8 py-4 rounded-sm font-bold hover:border-brand-primary transition-colors shadow-lg group">
+                        <a href={siteConfig.social.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 bg-brand-surface text-brand-text border border-brand-text/20 px-8 py-4 rounded-sm font-bold hover:border-brand-primary transition-colors shadow-lg group w-full sm:w-auto">
                             <Phone size={18} className="text-brand-social-whatsapp" /> WhatsApp Grubu <ArrowUpRight size={16} className="opacity-70 group-hover:opacity-100 transition-opacity" />
                         </a>
 
-                        <Link href="/katil" className="flex items-center justify-center gap-2 bg-transparent text-brand-text border border-brand-text/20 px-8 py-4 rounded-sm font-semibold hover:border-brand-primary hover:text-brand-primary transition-colors">
+                        <Link href="/katil" className="flex items-center justify-center gap-2 bg-transparent text-brand-text border border-brand-text/20 px-8 py-4 rounded-sm font-semibold hover:border-brand-primary hover:text-brand-primary transition-colors w-full sm:w-auto">
                             Aramıza Katıl
                         </Link>
                     </motion.div>
