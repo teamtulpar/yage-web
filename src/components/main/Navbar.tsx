@@ -85,7 +85,7 @@ export default function Navbar() {
             <Link
                 href="https://tulpar.gaziyage.org"
                 className="group flex items-center gap-1.5 px-2.5 py-1.5 md:px-4 md:py-2 rounded-sm border border-brand-text/10 bg-brand-surface-dark hover:bg-brand-surface-light hover:border-brand-text/20 transition-all duration-300"
-                title="TULPAR Ülgen Sistemine Git"
+                title="TULPAR Ar-Ge Takımı"
             >
               {/* Kırmızı Sinyal Ledi */}
               <span className="w-1.5 h-1.5 rounded-full bg-brand-error/60 group-hover:bg-brand-error group-hover:shadow-[0_0_8px_var(--color-brand-error)] transition-all duration-300"></span>
