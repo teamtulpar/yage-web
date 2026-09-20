@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+.tmp
+.impeccable
+.env*
+*.log
+*.tsbuildinfo
+DESIGN.md
+PRODUCT.md
+AGENTS.md

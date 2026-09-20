@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-bg: #09090b;
+  --color-brand-surface-darker: #0a0a0d;
+  --color-brand-surface-dark: #0c0c0f;
+  --color-brand-surface: #111113;
+  --color-brand-surface-light: #16161b;
+  --color-brand-surface-lighter: #18181b;
+
+  --color-brand-primary: #6366f1;
+  --color-brand-primary-light: #a5b4fc;
+  --color-brand-text: #f8fafc;
+  --color-brand-muted: #94a3b8;
+  --color-brand-error: #f87171;
+  --color-brand-social-instagram: #e1306c;
+  --color-brand-social-linkedin: #0077b5;
+  --color-brand-social-whatsapp: #25d366;
+  --color-brand-social-whatsapp-hover: #20b858;
+  --color-brand-scrollbar: #334155;
+
+  /* Animasyonlar */
+  --animate-fade-up: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-grid-pan: gridPan 15s linear infinite;
+  --animate-marquee-slow: marquee 40s linear infinite;
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes gridPan {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 24px; }
+  }
+}
+
+html, body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  overflow-x: clip;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-brand-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-brand-scrollbar); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@utility page-header {
+  @apply w-full pt-40 pb-16 px-6 border-b border-brand-text/5;
+}
+
+@utility page-header-content {
+  @apply max-w-6xl mx-auto;
+}
+
+@utility page-title {
+  @apply text-5xl md:text-7xl font-bold text-brand-text tracking-tight;
+}
+
+@utility content-link {
+  @apply inline-flex w-fit items-center gap-2 rounded-sm border border-brand-text/10 bg-brand-surface px-8 py-3 text-sm font-mono uppercase tracking-widest text-brand-text transition-colors hover:border-brand-text/30 hover:bg-brand-surface-light;
+}

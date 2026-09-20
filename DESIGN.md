@@ -1,0 +1,3 @@
+# YAGE — ZIP base
+
+The user-selected yage-web-master.zip is the visual base: near-black #09090b, surface #18181b, indigo #6366f1, white #f8fafc and muted slate #94a3b8. Preserve the source left-aligned oversized three-line introduction, spacious manifesto, activity strip, photo accordion, event cards, membership call to action, portraits and partners. Keep the existing galaxy logo. Existing verified event/team/project data and functional gallery/forms are added to this base. All pages share the purple palette. Responsive navigation collapses below 1024px; keyboard focus and reduced-motion are supported.
