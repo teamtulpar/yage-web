@@ -66,7 +66,14 @@ export default function JoinClient() {
                         </div>
                         <h1 className="page-title mb-4">Yönetim Kuruluna Katıl</h1>
                         <p className="text-base md:text-lg text-brand-muted/90 leading-relaxed mb-4">
-                            YAGE&apos;nin mutfağında yer almak, etkinlikleri organize eden ve projeleri yürüten çekirdek ekibimize katılmak için başvurunu gönderebilirsin.
+                            Gazi Üniversitesi Yazılım Araştırma ve Geliştirme Topluluğu (YAGE) olarak, yeni dönemde bizimle birlikte çalışacak ekip arkadaşlarımızı arıyoruz.
+
+                            Bu ekipte yer almak için üst düzey teknik bilgiye veya tecrübeye ihtiyacın yok.
+                            Aradığımız temel kriterler: Sorumluluk bilinci, öğrenme hevesi ve takım çalışmasına yatkınlık.
+
+                            Başvurusu olumlu değerlendirilen adaylarla iletişime geçilecektir.
+
+                            Başarılar!
                         </p>
                     </ScrollReveal>
                 </div>
