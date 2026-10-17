@@ -58,7 +58,7 @@ export default function JoinClient() {
     return (
         <main className="relative flex flex-col min-h-screen w-full bg-brand-bg overflow-hidden">
 
-            {/* --- ARKA PLAN DESENİ (DARK GRADIENT PATTERN) --- */}
+            {/* --- ARKA PLAN DESENİ (KAYDIRILABİLİR - ABSOLUTE) --- */}
             <div className="absolute inset-0 pointer-events-none select-none z-0">
                 <div
                     className="absolute inset-0 opacity-100"
@@ -68,7 +68,7 @@ export default function JoinClient() {
                         WebkitMask: 'radial-gradient(125% 100% at 0% 0%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.224) 88.2883%, rgba(0, 0, 0, 0) 100%)'
                     }}
                 >
-                    {/* YAGE rengine (Indigo) ayarlanmış eğik ışık hüzmeleri */}
+                    {/* Işık Hüzmeleri */}
                     <div className="absolute inset-0 opacity-20" style={{ background: 'linear-gradient(rgb(99, 102, 241) 0%, rgba(99, 102, 241, 0) 100%)', mask: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0,0,0) 20%, rgba(0,0,0,0) 36%, rgb(0,0,0) 55%, rgba(0,0,0,0.13) 67%, rgb(0,0,0) 78%, rgba(0,0,0,0) 97%)', WebkitMask: 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgb(0,0,0) 20%, rgba(0,0,0,0) 36%, rgb(0,0,0) 55%, rgba(0,0,0,0.13) 67%, rgb(0,0,0) 78%, rgba(0,0,0,0) 97%)', transform: 'skewX(45deg)' }} />
                     <div className="absolute inset-0 opacity-20" style={{ background: 'linear-gradient(rgb(99, 102, 241) 0%, rgba(99, 102, 241, 0) 100%)', mask: 'linear-gradient(90deg, rgba(0,0,0,0) 11%, rgb(0,0,0) 25%, rgba(0,0,0,0.55) 41%, rgba(0,0,0,0.13) 67%, rgb(0,0,0) 78%, rgba(0,0,0,0) 97%)', WebkitMask: 'linear-gradient(90deg, rgba(0,0,0,0) 11%, rgb(0,0,0) 25%, rgba(0,0,0,0.55) 41%, rgba(0,0,0,0.13) 67%, rgb(0,0,0) 78%, rgba(0,0,0,0) 97%)', transform: 'skewX(45deg)' }} />
                     <div className="absolute inset-0 opacity-20" style={{ background: 'linear-gradient(rgb(99, 102, 241) 0%, rgba(99, 102, 241, 0) 100%)', mask: 'linear-gradient(90deg, rgba(0,0,0,0) 9%, rgb(0,0,0) 20%, rgba(0,0,0,0.55) 28%, rgba(0,0,0,0.424) 40%, rgb(0,0,0) 48%, rgba(0,0,0,0.267) 54%, rgba(0,0,0,0.13) 78%, rgb(0,0,0) 88%, rgba(0,0,0,0) 97%)', WebkitMask: 'linear-gradient(90deg, rgba(0,0,0,0) 9%, rgb(0,0,0) 20%, rgba(0,0,0,0.55) 28%, rgba(0,0,0,0.424) 40%, rgb(0,0,0) 48%, rgba(0,0,0,0.267) 54%, rgba(0,0,0,0.13) 78%, rgb(0,0,0) 88%, rgba(0,0,0,0) 97%)', transform: 'skewX(45deg)' }} />
@@ -84,28 +84,28 @@ export default function JoinClient() {
                     style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0)`, backgroundSize: "24px 24px" }}
                 />
 
-                {/* Alt Kısım Geçişi */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-80" />
+                {/* Alt Kısım Geçişi - Arka planın kesilmemesi için uzatılmış fade efekti */}
+                <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-brand-bg via-brand-bg/90 to-transparent pointer-events-none" />
             </div>
             {/* --- ARKA PLAN BİTİŞ --- */}
 
             {/* İçerik */}
             <div className="relative z-10 w-full h-full flex flex-col">
-                {/* Üst Bilgi / Başlık Alanı */}
+                {/* Üst Bilgi / Başlık Alanı (Daha Okunabilir ve Dengeli Renkler) */}
                 <section className="pt-32 pb-12 px-6">
                     <div className="max-w-3xl mx-auto text-center">
                         <ScrollReveal>
-                            <div className="inline-flex items-center justify-center gap-2 mb-6 bg-brand-primary/10 px-4 py-1.5 rounded-full border border-brand-primary/20 backdrop-blur-sm">
-                                <div className="w-2 h-2 bg-brand-primary rounded-full animate-pulse"></div>
-                                <span className="font-mono text-xs font-bold tracking-widest uppercase text-brand-primary">Başvurular Açık</span>
+                            <div className="inline-flex items-center justify-center gap-2 mb-6 bg-brand-surface border border-brand-text/10 px-4 py-1.5 rounded-full backdrop-blur-md shadow-sm">
+                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                                <span className="font-mono text-xs font-bold tracking-widest uppercase text-brand-text">Başvurular Açık</span>
                             </div>
                             <h1 className="text-4xl md:text-5xl font-bold text-brand-text mb-6 tracking-tight drop-shadow-sm">Yönetim Kuruluna Katıl</h1>
-                            <div className="text-base md:text-lg text-brand-muted/90 leading-relaxed max-w-2xl mx-auto flex flex-col gap-4 drop-shadow-sm">
+                            <div className="text-base md:text-lg text-brand-muted leading-relaxed max-w-2xl mx-auto flex flex-col gap-4 drop-shadow-sm">
                                 <p>
                                     Gazi Üniversitesi Yazılım Araştırma ve Geliştirme Topluluğu (YAGE) olarak, yeni dönemde bizimle birlikte çalışacak ekip arkadaşlarımızı arıyoruz.
                                 </p>
                                 <p>
-                                    Bu ekipte yer almak için üst düzey teknik bilgiye veya tecrübeye ihtiyacın yok. Aradığımız temel kriterler: <strong className="text-brand-text font-semibold">Sorumluluk bilinci, öğrenme hevesi ve takım çalışmasına yatkınlık.</strong> Başvurusu olumlu değerlendirilen adaylarla iletişime geçilecektir.
+                                    Bu ekipte yer almak için üst düzey teknik bilgiye ihtiyacın yok. Aradığımız temel kriterler: <strong className="text-brand-text font-semibold">Sorumluluk bilinci, öğrenme hevesi ve takım çalışmasına yatkınlık.</strong>
                                 </p>
                             </div>
                         </ScrollReveal>
@@ -117,7 +117,6 @@ export default function JoinClient() {
                     <div className="max-w-3xl mx-auto">
                         {status === "success" ? (
                             <ScrollReveal>
-                                {/* Form kutusuna backdrop-blur eklendi ki arka plan deseni belli olsun */}
                                 <div className="bg-brand-surface/80 backdrop-blur-xl border border-brand-text/10 rounded-sm p-10 flex flex-col items-center text-center animate-fade-in shadow-2xl">
                                     <CheckCircle2 size={56} className="text-brand-primary mb-6" />
                                     <h2 className="text-2xl font-bold text-brand-text mb-3">Başvurun alındı.</h2>
@@ -172,7 +171,6 @@ export default function JoinClient() {
                                                     </button>
                                                 ))}
                                             </div>
-                                            {/* Sadece birim seçildiğinde görünen sade açıklama metni */}
                                             {formData.primaryUnit && (
                                                 <p className="text-sm text-brand-muted mt-1 animate-fade-in">
                                                     <strong className="text-brand-primary font-medium">{formData.primaryUnit}:</strong> {unitDetails[formData.primaryUnit].description}
@@ -180,7 +178,6 @@ export default function JoinClient() {
                                             )}
                                         </div>
 
-                                        {/* Soru alanı her zaman açık */}
                                         <Textarea
                                             id="unitAnswer"
                                             label={formData.primaryUnit ? unitDetails[formData.primaryUnit].question : "Bu birimde neden görev almak istiyorsun?"}
