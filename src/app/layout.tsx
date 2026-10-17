@@ -27,11 +27,11 @@ export const metadata: Metadata = {
     keywords: ["YAGE", "Gazi Üniversitesi", "Yazılım Topluluğu", "Teknoloji", "Öğrenci Topluluğu"],
     authors: [{ name: "YAGE" }],
     creator: "YAGE",
-    metadataBase: new URL("https://yage.gazi.edu.tr"), // TODO kaldırıldı, gerçek domain formatına geçildi (Örnek domain, kendi domaininize göre ayarlayabilirsiniz)
+    metadataBase: new URL("https://gaziyage.org"),
     openGraph: {
         type: "website",
         locale: "tr_TR",
-        url: "https://yage.gazi.edu.tr",
+        url: "https://gaziyage.org",
         title: "YAGE | Yazılım Araştırma ve Geliştirme Topluluğu",
         description: "Gazi Üniversitesi Yazılım Araştırma ve Geliştirme Topluluğu. Yazılım dünyasında birlikte öğreniyor ve projeler geliştiriyoruz.",
         siteName: "YAGE",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
         ],
     },
     icons: {
-        icon: "/favicon.png",
-        shortcut: "/favicon.png",
-        apple: "/favicon.png",
+        icon: "/icon.png",
+        shortcut: "/icon.png",
+        apple: "/icon.png",
     },
 };
 
