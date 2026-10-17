@@ -1,8 +1,8 @@
-import { events } from "../../../data/siteData";
-import GalleryViewer, { GalleryPhotoItem } from "../../../components/main/GalleryViewer";
+import { events } from "../../data/siteData";
+import GalleryViewer, { GalleryPhotoItem } from "../../components/main/GalleryViewer";
 
 export const metadata = {
-    title: "Galeri | YAGE",
+    title: "Galeri",
     description: "YAGE etkinliklerinden ve buluşmalarından kareler.",
 };
 

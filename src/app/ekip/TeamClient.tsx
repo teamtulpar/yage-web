@@ -7,17 +7,13 @@ import ScrollReveal from "@/src/components/main/ScrollReveal";
 import PersonCard from "@/src/components/main/PersonCard";
 import CtaLink from "@/src/components/main/CtaLink";
 
-export default function TeamPage() {
+export default function TeamClient() {
     const [activeTab, setActiveTab] = useState("Yönetim");
     const [isSticky, setIsSticky] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 100) {
-                setIsSticky(true);
-            } else {
-                setIsSticky(false);
-            }
+            setIsSticky(window.scrollY > 100);
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -71,7 +67,7 @@ export default function TeamPage() {
 
             <section className="max-w-6xl mx-auto px-6 w-full pt-8 pb-24 min-h-[50vh]">
                 {activeTab === "Yönetim" && (
-                    <div key="yonetim-tab" className="animate-fade-in flex flex-col items-center gap-10 md:gap-14">
+                    <div className="animate-fade-in flex flex-col items-center gap-10 md:gap-14">
                         {president.length > 0 && <ScrollReveal><PersonCard member={president[0]} /></ScrollReveal>}
                         {vicePresidents.length > 0 && (
                             <div className="flex flex-wrap justify-center gap-8 md:gap-16">
@@ -80,7 +76,7 @@ export default function TeamPage() {
                         )}
                         {unitLeaders.length > 0 && (
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-10 gap-x-6 md:gap-x-8 w-full justify-items-center">
-                                {unitLeaders.map((member, i) => <ScrollReveal key={`birim-${i}`} delay={i * 50}><PersonCard member={member} roleOverride={`${member.unit} Birim Başkanı`} /></ScrollReveal>)}
+                                {unitLeaders.map((member, i) => <ScrollReveal key={i} delay={i * 50}><PersonCard member={member} roleOverride={`${member.unit} Birim Başkanı`} /></ScrollReveal>)}
                             </div>
                         )}
                     </div>
@@ -89,11 +85,11 @@ export default function TeamPage() {
                     const activeUnitLeader = teamMembers.find(m => m.unit === activeTab && m.role.includes("Başkanı"));
                     const activeUnitMembers = teamMembers.filter(m => m.unit === activeTab && !m.role.includes("Başkanı"));
                     return (
-                        <div key={`birim-tab-${activeTab}`} className="animate-fade-in flex flex-col items-center gap-10 md:gap-14">
+                        <div className="animate-fade-in flex flex-col items-center gap-10 md:gap-14">
                             {activeUnitLeader && <ScrollReveal><PersonCard member={activeUnitLeader} roleOverride={`${activeTab} Birim Başkanı`} /></ScrollReveal>}
                             {activeUnitMembers.length > 0 && (
                                 <div className="flex flex-wrap justify-center gap-8 md:gap-12 w-full">
-                                    {activeUnitMembers.map((member, i) => <ScrollReveal key={`uye-${i}`} delay={i * 50}><PersonCard member={member} hideRole={true} /></ScrollReveal>)}
+                                    {activeUnitMembers.map((member, i) => <ScrollReveal key={i} delay={i * 50}><PersonCard member={member} hideRole={true} /></ScrollReveal>)}
                                 </div>
                             )}
                         </div>

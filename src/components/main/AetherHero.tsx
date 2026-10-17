@@ -99,14 +99,23 @@ const AetherHero = () => {
             }
         }
 
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
+        let resizeTimeout: NodeJS.Timeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (canvas) {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    init();
+                }
+            }, 250);
         };
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+
+        window.addEventListener('resize', handleResize);
 
         const connect = () => {
             let opacityValue = 1;
@@ -185,9 +194,10 @@ const AetherHero = () => {
         observer.observe(container);
 
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener('resize', handleResize);
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseout', handleMouseOut);
+            clearTimeout(resizeTimeout);
             isAnimating = false;
             cancelAnimationFrame(animationFrameId);
             observer.disconnect();

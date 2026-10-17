@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { Search, ChevronDown, RotateCcw } from "lucide-react";
-import { events, eventCategories, academicYears } from "../../../data/siteData";
-import EventCard from "../../../components/main/EventCard";
-import FeaturedEventCard from "../../../components/main/FeaturedEventCard";
-import ScrollReveal from "../../../components/main/ScrollReveal";
+import { events, eventCategories, academicYears } from "../../data/siteData";
+import EventCard from "../../components/main/EventCard";
+import FeaturedEventCard from "../../components/main/FeaturedEventCard";
+import ScrollReveal from "../../components/main/ScrollReveal";
 
-export default function EventsPage() {
+export default function EventsClient() {
     const [activeCategory, setActiveCategory] = useState("");
     const [activeYear, setActiveYear] = useState("Tüm Dönemler");
     const [searchQuery, setSearchQuery] = useState("");
@@ -63,7 +63,6 @@ export default function EventsPage() {
                 <div className="max-w-7xl mx-auto px-6 w-full">
                     <ScrollReveal delay={100}>
                         <div className="flex flex-col gap-3.5">
-                            {/* Kategori Filtreleri */}
                             <div
                                 className="flex items-center gap-2 overflow-x-auto pb-2 -mx-6 px-6 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
                                 style={{ scrollbarWidth: "none" }}
@@ -91,14 +90,9 @@ export default function EventsPage() {
                                 })}
                             </div>
 
-                            {/* Dönem Seçimi ve Arama */}
                             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
                                 <div className="relative shrink-0 sm:w-60">
-                                    <label htmlFor="academic-year-select" className="sr-only">
-                                        Dönem Seçin
-                                    </label>
                                     <select
-                                        id="academic-year-select"
                                         value={activeYear}
                                         onChange={(e) => setActiveYear(e.target.value)}
                                         className="w-full appearance-none bg-brand-surface text-brand-text border border-brand-text/10 rounded-sm pl-4 pr-10 py-2.5 text-base sm:text-sm font-medium focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary transition-colors cursor-pointer"
@@ -120,9 +114,7 @@ export default function EventsPage() {
                                         size={17}
                                         className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted"
                                     />
-                                    {/* DÜZELTME 2: text-sm yerine mobilde text-base, masaüstünde sm:text-sm */}
                                     <input
-                                        aria-label="Etkinlik ara"
                                         type="text"
                                         placeholder="Etkinlik başlığı veya özet ara..."
                                         value={searchQuery}
@@ -134,7 +126,6 @@ export default function EventsPage() {
                                             type="button"
                                             onClick={() => setSearchQuery("")}
                                             className="absolute right-3 top-1/2 -translate-y-1/2 text-brand-muted hover:text-brand-text p-1 text-xs transition-colors"
-                                            aria-label="Aramayı temizle"
                                         >
                                             ✕
                                         </button>
@@ -151,7 +142,7 @@ export default function EventsPage() {
                     <ScrollReveal delay={200}>
                         {!isDefaultView && (
                             <div className="flex items-center justify-between gap-4 py-3 mb-4 border-b border-brand-text/5">
-                                <p role="status" className="text-sm text-brand-muted">
+                                <p className="text-sm text-brand-muted">
                                     <span className="font-semibold text-brand-text">{filteredEvents.length}</span> etkinlik listeleniyor
                                 </p>
                                 <button
@@ -173,13 +164,10 @@ export default function EventsPage() {
                                 <h3 className="text-lg font-semibold text-brand-text mb-2">
                                     Bu filtreyle etkinlik bulunamadı
                                 </h3>
-                                <p className="text-sm text-brand-muted max-w-sm mb-6 leading-relaxed">
-                                    Arama kriterlerinizi değiştirerek veya filtreleri temizleyerek tüm etkinlikleri tekrar görüntüleyebilirsiniz.
-                                </p>
                                 <button
                                     type="button"
                                     onClick={handleResetFilters}
-                                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-sm text-sm font-bold text-brand-text bg-brand-primary hover:bg-brand-primary/80 transition-colors"
+                                    className="mt-6 inline-flex items-center gap-2 px-6 py-2.5 rounded-sm text-sm font-bold text-brand-text bg-brand-primary hover:bg-brand-primary/80 transition-colors"
                                 >
                                     <RotateCcw size={14} />
                                     Filtreleri Temizle
