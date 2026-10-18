@@ -6,7 +6,6 @@ import { events } from "../../../data/siteData";
 import ScrollReveal from "../../../components/main/ScrollReveal";
 import GalleryViewer from "../../../components/main/GalleryViewer";
 
-// Next.js 15+ için params bir Promise olarak tanımlanmalı
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -30,7 +29,6 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function EventDetail({ params }: Props) {
-  // Params objesini asenkron olarak çözüyoruz
   const resolvedParams = await params;
   const event = events.find((e) => e.slug === resolvedParams.slug);
 
@@ -105,7 +103,14 @@ export default async function EventDetail({ params }: Props) {
               <ScrollReveal delay={400}>
                 <div className="mt-16 pt-16 border-t border-brand-text/5">
                   <h2 className="text-2xl font-bold text-brand-text mb-8 tracking-tight">Etkinlikten Kareler</h2>
-                  <GalleryViewer photos={event.gallery!.map((src, id) => ({ id, src, title: event.title, date: event.date, category: event.category }))} />
+                  <GalleryViewer photos={event.gallery!.map((src, id) => ({
+                    id,
+                    src,
+                    title: event.title,
+                    date: event.date,
+                    category: event.category,
+                    slug: event.slug
+                  }))} />
                 </div>
               </ScrollReveal>
           )}
