@@ -19,28 +19,9 @@ export default function Home() {
         <AetherHero />
 
         <div className="bg-brand-surface-dark">
-          <section className="py-24 md:py-32 px-6 relative z-10">
-            <ScrollReveal className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-12 gap-12 items-start">
-                <div className="md:col-span-7">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-text leading-tight tracking-tight">
-                    Sadece teoride kalmıyor, <br className="hidden md:block"/>
-                    <span className="text-brand-muted">birlikte üretiyoruz.</span>
-                  </h2>
-                </div>
-                <div className="md:col-span-5 flex flex-col gap-6 text-lg text-brand-muted/90 leading-relaxed font-medium mt-2">
-                  <p>
-                    YAGE, yazılım ve teknoloji alanında kendini geliştirmek isteyen öğrencileri bir araya getirir. Eğitimler, teknik geziler, söyleşiler ve çalışma grupları aracılığıyla farklı alanlarda bilgi edinme ve uygulama imkânı sunar.
-                  </p>
-                  <p>
-                    Topluluk faaliyetlerinin yanı sıra proje ekipleriyle birlikte çalışmalar yürütüyor, edinilen bilgilerin uygulamaya aktarılmasını destekliyoruz. YAGE&apos;nin temel amacı, öğrencilerin üniversite hayatları boyunca birlikte öğrenebilecekleri, üretebilecekleri ve kendilerini geliştirebilecekleri bir ortam oluşturmak.
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
-          </section>
 
-          <div className="flex overflow-hidden py-8 relative select-none border-y border-brand-text/5 bg-brand-surface-darker">
+          {/* Metin bölümü kaldırıldı. border-y yerine border-b kullanılarak AetherHero ile kesintisiz geçiş sağlandı. */}
+          <div className="flex overflow-hidden py-8 relative select-none border-b border-brand-text/5 bg-brand-surface-darker">
             <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-brand-surface-darker to-transparent z-10 pointer-events-none"></div>
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-brand-surface-darker to-transparent z-10 pointer-events-none"></div>
 

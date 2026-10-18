@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: teamtulpar/yage-web
+  branch: main
+  local_backend: true
+
+media_folder: "public/images/etkinlikler"
+public_folder: "/images/etkinlikler"
+
+collections:
+  - name: "etkinlikler"
+    label: "Etkinlikler"
+    folder: "src/data/etkinlikler"
+    create: true
+    slug: "{{slug}}"
+    format: "json"
+    fields:
+      - {label: "ID (Sıralama için)", name: "id", widget: "number", value_type: "int"}
+      - {label: "URL Uzantısı (Slug)", name: "slug", widget: "string", hint: "Örn: tanisma-etkinligi-2024 (Boşluk bırakmayın)"}
+      - {label: "Başlık", name: "title", widget: "string"}
+      - {label: "Görünen Tarih", name: "date", widget: "string", hint: "Örn: 20 Ekim 2024"}
+      - {label: "Sıralama Tarihi (ISO)", name: "isoDate", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Akademik Yıl", name: "academicYear", widget: "select", options: ["2026-2027", "2025-2026", "2024-2025"]}
+      - {label: "Kategori", name: "category", widget: "select", options: ["Eğitim", "Gezi", "Panel", "Sosyal", "Yarışma"]}
+      - {label: "Konum", name: "location", widget: "string"}
+      - {label: "Kapak Fotoğrafı", name: "image", widget: "image"}
+      - {label: "Galeri Fotoğrafları", name: "gallery", widget: "list", required: false, field: {label: "Fotoğraf", name: "photo", widget: "image"}}
+      - {label: "Özet", name: "summary", widget: "text"}
+      - {label: "İçerik", name: "description", widget: "text", hint: "Paragraflar arasında birer satır boşluk bırakın."}

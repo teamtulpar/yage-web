@@ -27,7 +27,11 @@ export const events: CommunityEvent[] = [
         summary: "Üç öğrenci topluluğunun iş birliğiyle düzenlediğimiz Gazi DataForge 2026 veri bilimi yarışmasında takımlar, gerçek bir veri seti üzerinde çalışarak veri odaklı çözümler geliştirdi.",
         description: "Gazi Üniversitesi Finansal Teknolojiler, Yazılım Araştırma ve Geliştirme ve Veri Bilimi topluluklarının iş birliğiyle düzenlediğimiz Gazi DataForge 2026, Teknopark Ankara - Nar Kuluçka Merkezi'nde gerçekleştirildi. Gün boyu süren veri bilimi yarışmasında farklı disiplinlerden katılımcılar takımlar oluşturarak kendilerine sunulan veri seti üzerinde çalıştı.\n\nEtkinlik boyunca takımlar, veri setini analiz ederek problem üzerinde çalıştı ve elde ettikleri veriler doğrultusunda çözüm geliştirdi. Açılış konuşmasının ardından veri setinin paylaşılmasıyla başlayan maraton, gün boyunca devam eden çalışma ve değerlendirme sürecinin ardından gerçekleştirilen kapanış programıyla tamamlandı. Katılımcılar bu süreçte veri analizi, problem çözme ve takım çalışması becerilerini uygulamalı olarak kullanma fırsatı buldu.\n\nYarışma sonucunda birinciliği Muhammet Emin Korkut, ikinciliği Rıza Yurtseven ve Mertcan Hırlak'tan oluşan Tulpar takımı, üçüncülüğü ise Selman Sezgin ve Emirhan Çoruh'tan oluşan Overfitters takımı elde etti. Dereceye giren tüm takımları tebrik eder, etkinliğe katılan yarışmacılara ve organizasyonun gerçekleştirilmesine katkı sağlayan Finansal Teknolojiler ve Veri Bilimi topluluklarına teşekkür ederiz.",
         image: "/images/etkinlikler/dataforge.png",
-        gallery: []
+        gallery: [
+            "/images/etkinlikler/dataforge-1.jpg",
+            "/images/etkinlikler/dataforge-2.jpg",
+            "/images/etkinlikler/dataforge-3.jpg"
+        ]
     },
     {
         id: 23,
@@ -41,13 +45,16 @@ export const events: CommunityEvent[] = [
         summary: "Mount & Blade serisinin geliştiricisi TaleWorlds Entertainment'ı ziyaret ederek profesyonel oyun geliştirme süreçlerini yakından inceledik.",
         description: "Mount & Blade serisinin geliştiricisi TaleWorlds Entertainment'ın Hacettepe Teknokent'teki ofisine teknik bir gezi gerçekleştirdik. Gezi kapsamında profesyonel bir oyun stüdyosunun çalışma ortamını ve oyun geliştirme süreçlerini yakından görme fırsatı bulduk.\n\nZiyaret sırasında TaleWorlds ekibinden profesyonel oyun geliştirme süreçleri ve kullanılan teknolojiler hakkında bilgi aldık. Sektördeki çalışma deneyimlerini ve oyun geliştirme süreçlerine ilişkin tecrübelerini paylaşan ekip üyeleriyle bir araya gelerek merak ettiğimiz konular hakkında sohbet etme fırsatı bulduk.\n\nAyrıca oyun sektöründe kariyer planlayan katılımcılar için sektördeki çalışma ortamını ve profesyonel oyun geliştirme süreçlerini yerinde görmek açısından faydalı bir deneyim oldu.\n\nBizleri ağırlayan ve deneyimlerini paylaşan TaleWorlds Entertainment ekibine teşekkür ederiz.",
         image: "/images/etkinlikler/taleworlds.jpeg",
-        gallery: []
+        gallery: [
+            "/images/etkinlikler/taleworlds-1.jpg",
+            "/images/etkinlikler/taleworlds-2.jpg"
+        ]
     },
     {
         id: 22,
         slug: "unity-egitimi-2026",
         date: "25-26-28 Mart 2026",
-        isoDate: "2026-03-25", // Çoklu tarihlerde başlangıç tarihi baz alındı
+        isoDate: "2026-03-25",
         academicYear: "2025-2026",
         category: "Eğitim",
         location: "Laboratuvar 6",
@@ -353,10 +360,9 @@ export const events: CommunityEvent[] = [
     }
 ];
 
-// Artık etkinlikleri manuel değil, tarihlerine göre otomatk azalan (en yeniden en eskiye) şekilde sıralayabiliriz.
 events.sort((a, b) => {
     if (a.isoDate && b.isoDate) {
         return new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime();
     }
-    return b.id - a.id; // Yedeğimiz yine id kalsın
+    return b.id - a.id;
 });

@@ -1,260 +1,143 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import Link from "next/link";
+import { X, ChevronLeft, ChevronRight, Calendar, ArrowRight } from "lucide-react";
 
-// Verinin events sayfasından veya dışarıdan gelirken kullanacağı standart tip
 export interface GalleryPhotoItem {
- id: string | number;
+ id: number;
  src: string;
- title?: string;
- date?: string;
- category?: string;
+ title: string;
+ date: string;
+ category: string;
+ slug: string;
 }
 
 interface GalleryViewerProps {
  photos: GalleryPhotoItem[];
- initialIndex?: number | null; // ? eklendi, optional yapıldı
+ initialIndex?: number | null;
 }
 
 export default function GalleryViewer({ photos, initialIndex = null }: GalleryViewerProps) {
- const [selectedIndex, setSelectedIndex] = useState<number | null>(initialIndex);
+ const [currentIndex, setCurrentIndex] = useState<number | null>(initialIndex);
 
- // Touch swipe takibi (Mobilde hafif kaydırma için)
- const touchStartX = useRef<number | null>(null);
- const touchEndX = useRef<number | null>(null);
+ const closeLightbox = () => setCurrentIndex(null);
 
- const filteredPhotos = photos;
+ const showNext = useCallback(() => {
+  if (currentIndex !== null) {
+   setCurrentIndex((prev) => (prev! + 1) % photos.length);
+  }
+ }, [currentIndex, photos.length]);
 
- // Lightbox Gezinme Fonksiyonları
- const openLightbox = (index: number) => setSelectedIndex(index);
-
- const closeLightbox = useCallback(() => {
-  setSelectedIndex(null);
- }, []);
+ const showPrev = useCallback(() => {
+  if (currentIndex !== null) {
+   setCurrentIndex((prev) => (prev! - 1 + photos.length) % photos.length);
+  }
+ }, [currentIndex, photos.length]);
 
  useEffect(() => {
-  document.body.style.overflow = selectedIndex === null ? "" : "hidden";
-  return () => {
-   document.body.style.overflow = "";
-  };
- }, [selectedIndex]);
-
- const nextPhoto = useCallback(() => {
-  if (filteredPhotos.length === 0) return;
-  setSelectedIndex((prev) => (prev === null ? 0 : (prev + 1) % filteredPhotos.length));
- }, [filteredPhotos.length]);
-
- const prevPhoto = useCallback(() => {
-  if (filteredPhotos.length === 0) return;
-  setSelectedIndex((prev) =>
-      prev === null ? 0 : (prev - 1 + filteredPhotos.length) % filteredPhotos.length
-  );
- }, [filteredPhotos.length]);
-
- // Klavye Kontrolleri (Esc, Sol Ok, Sağ Ok)
- useEffect(() => {
-  if (selectedIndex === null) return;
-
   const handleKeyDown = (e: KeyboardEvent) => {
-   if (e.key === "Escape") {
-    closeLightbox();
-   } else if (e.key === "ArrowRight") {
-    nextPhoto();
-   } else if (e.key === "ArrowLeft") {
-    prevPhoto();
-   }
+   if (currentIndex === null) return;
+   if (e.key === "Escape") closeLightbox();
+   if (e.key === "ArrowRight") showNext();
+   if (e.key === "ArrowLeft") showPrev();
   };
 
   window.addEventListener("keydown", handleKeyDown);
-  return () => window.removeEventListener("keydown", handleKeyDown);
- }, [selectedIndex, closeLightbox, nextPhoto, prevPhoto]);
+  document.body.style.overflow = currentIndex !== null ? "hidden" : "auto";
 
- // Mobil Swipe Olayları
- const handleTouchStart = (e: React.TouchEvent) => {
-  touchStartX.current = e.touches[0].clientX;
-  touchEndX.current = null;
- };
+  return () => {
+   window.removeEventListener("keydown", handleKeyDown);
+   document.body.style.overflow = "auto";
+  };
+ }, [currentIndex, showNext, showPrev]);
 
- const handleTouchMove = (e: React.TouchEvent) => {
-  touchEndX.current = e.touches[0].clientX;
- };
+ if (!photos || photos.length === 0) return null;
 
- const handleTouchEnd = () => {
-  if (touchStartX.current === null || touchEndX.current === null) return;
-  const diff = touchStartX.current - touchEndX.current;
-  if (diff > 50) {
-   nextPhoto();
-  } else if (diff < -50) {
-   prevPhoto();
-  }
-  touchStartX.current = null;
-  touchEndX.current = null;
- };
-
- const currentPhoto = selectedIndex !== null ? filteredPhotos[selectedIndex] : null;
+ const currentPhoto = currentIndex !== null ? photos[currentIndex] : null;
 
  return (
      <>
-      {/* 3. & 7. & 8. FOTOĞRAF IZGARASI (Bento/Masonry düzen: Öne çıkan 2x2, sağında 2 kart üst üste, boşluksuz) */}
-      <section className="w-full pb-32" aria-label="Fotoğraf arşivi">
-       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 auto-rows-fr">
-        {filteredPhotos.map((photo, index) => {
-         const isFeatured = index === 0 && filteredPhotos.length >= 3;
-         const hasCaption = Boolean(photo.title || photo.date || photo.category);
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+       {photos.map((photo, index) => (
+           <div
+               key={photo.id}
+               onClick={() => setCurrentIndex(index)}
+               className="relative w-full aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer bg-brand-surface-dark border border-brand-text/5"
+           >
+            <Image
+                src={photo.src}
+                alt={photo.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+             <span className="text-brand-primary text-xs font-bold tracking-widest uppercase mb-1">{photo.category}</span>
+             <h3 className="text-white font-bold text-base leading-snug line-clamp-2">{photo.title}</h3>
+            </div>
+           </div>
+       ))}
+      </div>
 
-         return (
-             <figure
-                 key={photo.id || index}
-                 onClick={() => openLightbox(index)}
-                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                   e.preventDefault();
-                   openLightbox(index);
-                  }
-                 }}
-                 tabIndex={0}
-                 role="button"
-                 aria-label={photo.title ? `${photo.title}: fotoğrafı büyüt` : "Fotoğrafı büyüt"}
-                 className={`group relative rounded-xl overflow-hidden border border-brand-text/5 bg-brand-surface-dark cursor-pointer select-none focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-colors hover:border-brand-primary/30 ${
-                     isFeatured
-                         ? "aspect-[16/10] sm:aspect-[16/9] sm:col-span-2 lg:col-span-2 lg:row-span-2 lg:aspect-auto lg:h-full"
-                         : "aspect-[16/10] w-full"
-                 }`}
-             >
-              {/* next/image sabit aspect-ratio ile (CLS sıfır) */}
-              <Image
-                  src={photo.src}
-                  alt={photo.title || "YAGE etkinlik fotoğrafı"}
-                  fill
-                  priority={index < 3}
-                  sizes={
-                   isFeatured
-                       ? "(max-width: 768px) 100vw, 66vw"
-                       : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  }
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
+      {currentIndex !== null && currentPhoto && (
+          <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-sm animate-fade-in">
 
-              {/* 4. CAPTION YERİ: Masaüstünde hover'da, mobilde her zaman görünür gradient overlay */}
-              {hasCaption && (
-                  <figcaption className="absolute inset-x-0 bottom-0 pt-16 pb-4 px-4 sm:px-5 bg-gradient-to-t from-brand-bg via-brand-bg/60 to-transparent z-10 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100 flex flex-col justify-end pointer-events-none">
-                   {photo.category && (
-                       <span className="text-[11px] font-bold text-brand-primary uppercase tracking-wider mb-1">
-                        {photo.category}
-                      </span>
-                   )}
-                   {photo.title && (
-                       <p className="text-sm sm:text-base font-bold text-brand-text leading-snug line-clamp-2 drop-shadow-sm">
-                        {photo.title}
-                       </p>
-                   )}
-                   {photo.date && (
-                       <span className="text-xs text-brand-muted font-normal mt-1 flex items-center gap-1.5 drop-shadow-sm">
-                        <Calendar size={12} className="text-brand-muted/70 shrink-0" />
-                        <span>{photo.date}</span>
-                      </span>
-                   )}
-                  </figcaption>
-              )}
-             </figure>
-         );
-        })}
-       </div>
-      </section>
+           <button
+               onClick={closeLightbox}
+               className="absolute top-6 right-6 z-[110] p-3 text-white/70 hover:text-white bg-black/50 hover:bg-white/10 rounded-full transition-colors"
+               aria-label="Kapat"
+           >
+            <X size={24} />
+           </button>
 
-      {/* 5. LIGHTBOX MODAL (Tam ekran, klavye okları, swipe, focus trap) */}
-      {currentPhoto && selectedIndex !== null && (
-          <div
-              role="dialog"
-              aria-modal="true"
-              aria-label="Fotoğraf detay görünümü"
-              onClick={(e) => {
-               if (e.target === e.currentTarget) closeLightbox();
-              }}
-              className="fixed inset-0 z-[100] bg-brand-bg/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-6 animate-fade-in select-none"
-          >
-           {/* Üst Çubuk: Sayaç ve Kapat Butonu */}
-           <div className="w-full flex items-center justify-between text-brand-muted z-20">
-            <span className="text-sm font-mono tracking-wider text-brand-muted">
-              {selectedIndex + 1} / {filteredPhotos.length}
-            </span>
+           <button
+               onClick={showPrev}
+               className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-[110] p-4 text-white/50 hover:text-white hover:scale-110 transition-all"
+           >
+            <ChevronLeft size={36} />
+           </button>
+           <button
+               onClick={showNext}
+               className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-[110] p-4 text-white/50 hover:text-white hover:scale-110 transition-all"
+           >
+            <ChevronRight size={36} />
+           </button>
 
-            <button
-                type="button"
-                autoFocus
-                onClick={closeLightbox}
-                aria-label="Kapat (Esc)"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-brand-text/10 hover:bg-brand-text/20 text-brand-text text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            >
-             <span>Kapat</span>
-             <X size={18} />
-            </button>
+           <div className="relative w-full h-full max-h-[75vh] md:max-h-[80vh] px-4 md:px-24 flex items-center justify-center">
+            <Image
+                src={currentPhoto.src}
+                alt={currentPhoto.title}
+                fill
+                sizes="100vw"
+                className="object-contain select-none pointer-events-none"
+                quality={100}
+            />
            </div>
 
-           {/* Orta Alan: Önceki Buton, Fotoğraf, Sonraki Buton (Swipe destekli) */}
-           <div
-               className="relative flex-1 w-full max-h-[78vh] flex items-center justify-center my-auto"
-               onTouchStart={handleTouchStart}
-               onTouchMove={handleTouchMove}
-               onTouchEnd={handleTouchEnd}
-           >
-            {/* Sol Ok */}
-            <button
-                type="button"
-                onClick={(e) => {
-                 e.stopPropagation();
-                 prevPhoto();
-                }}
-                aria-label="Önceki fotoğraf (Sol ok)"
-                className="absolute left-1 sm:left-4 z-20 w-11 h-11 rounded-full bg-brand-bg/60 hover:bg-brand-primary text-brand-text flex items-center justify-center border border-brand-text/10 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            >
-             <ChevronLeft size={24} />
-            </button>
-
-            {/* Büyük Fotoğraf */}
-            <div className="relative w-full h-full max-w-6xl max-h-full flex items-center justify-center p-2">
-             <Image
-                 src={currentPhoto.src}
-                 alt={currentPhoto.title || "Tam boyutlu galeri fotoğrafı"}
-                 fill
-                 priority
-                 sizes="100vw"
-                 className="object-contain"
-             />
+           <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+             <h2 className="text-white text-xl md:text-2xl font-bold mb-2">{currentPhoto.title}</h2>
+             <div className="flex items-center gap-4 text-white/60 text-sm font-mono tracking-wider">
+              <span>{currentPhoto.category}</span>
+              <span className="w-1 h-1 rounded-full bg-white/30"></span>
+              <span className="flex items-center gap-1.5"><Calendar size={14} /> {currentPhoto.date}</span>
+             </div>
             </div>
 
-            {/* Sağ Ok */}
-            <button
-                type="button"
-                onClick={(e) => {
-                 e.stopPropagation();
-                 nextPhoto();
-                }}
-                aria-label="Sonraki fotoğraf (Sağ ok)"
-                className="absolute right-1 sm:right-4 z-20 w-11 h-11 rounded-full bg-brand-bg/60 hover:bg-brand-primary text-brand-text flex items-center justify-center border border-brand-text/10 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary"
+            <Link
+                href={`/etkinlikler/${currentPhoto.slug}`}
+                onClick={closeLightbox}
+                className="shrink-0 flex items-center gap-2 bg-brand-primary text-brand-text px-8 py-3.5 text-sm font-bold uppercase tracking-widest hover:bg-brand-text hover:text-brand-bg transition-colors rounded-sm"
             >
-             <ChevronRight size={24} />
-            </button>
+             Etkinliği İncele <ArrowRight size={16} />
+            </Link>
            </div>
 
-           {/* Alt Çubuk: Caption Bilgisi (Yalnızca başlık veya tarih varsa) */}
-           {(currentPhoto.title || currentPhoto.date) && (
-               <div className="w-full text-center max-w-2xl mx-auto py-2 z-20">
-                {currentPhoto.title && (
-                    <h3 className="text-base sm:text-lg font-bold text-brand-text leading-snug">
-                     {currentPhoto.title}
-                    </h3>
-                )}
-                {currentPhoto.date && (
-                    <p className="text-xs sm:text-sm text-brand-muted mt-1 flex items-center justify-center gap-1.5 font-normal">
-                     <Calendar size={13} className="text-brand-muted/70" />
-                     <span>{currentPhoto.date}</span>
-                    </p>
-                )}
-               </div>
-           )}
+           <div className="absolute top-8 left-8 text-white/50 font-mono tracking-widest text-sm">
+            {currentIndex + 1} / {photos.length}
+           </div>
           </div>
       )}
      </>

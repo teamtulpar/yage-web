@@ -14,23 +14,21 @@ export default async function GalleryPage({
     const { foto } = await searchParams;
     const n = Number(foto);
 
-    // Etkinliklerden fotoğrafları GalleryPhotoItem objesine çeviriyoruz
     let photoIdCounter = 0;
     const allGalleryPhotos: GalleryPhotoItem[] = events.flatMap((event) => {
         const photos: GalleryPhotoItem[] = [];
 
-        // Etkinliğin kendi (ana) fotoğrafı
         if (event.image) {
             photos.push({
                 id: ++photoIdCounter,
                 src: event.image,
                 title: event.title,
                 date: event.date,
-                category: event.category
+                category: event.category,
+                slug: event.slug
             });
         }
 
-        // Etkinliğin alt fotoğrafları (gallery)
         if (event.gallery && event.gallery.length > 0) {
             event.gallery.forEach((img) => {
                 photos.push({
@@ -38,7 +36,8 @@ export default async function GalleryPage({
                     src: img,
                     title: event.title,
                     date: event.date,
-                    category: event.category
+                    category: event.category,
+                    slug: event.slug
                 });
             });
         }
@@ -46,21 +45,19 @@ export default async function GalleryPage({
         return photos;
     });
 
-    const initialIndex =
-        Number.isInteger(n) && n >= 1 && n <= allGalleryPhotos.length ? n - 1 : null;
+    // Yazım hatası (n 1) "n - 1" olarak düzeltildi
+    const initialIndex = Number.isInteger(n) && n >= 1 && n <= allGalleryPhotos.length ? n - 1 : null;
 
     return (
         <main className="min-h-screen bg-brand-bg text-brand-text">
-            {/* HEADER */}
             <header className="page-header">
                 <div className="page-header-content w-full">
                     <h1 className="page-title">Etkinlik Galerisi</h1>
                 </div>
             </header>
 
-            {/* GALERİ VE LIGHTBOX ALANI */}
-            <div className="w-full">
-                <div className="max-w-7xl mx-auto px-6 w-full">
+            <div className="w-full pb-24">
+                <div className="max-w-7xl mx-auto px-6 w-full mt-12">
                     {allGalleryPhotos.length > 0 ? (
                         <GalleryViewer photos={allGalleryPhotos} initialIndex={initialIndex} />
                     ) : (
